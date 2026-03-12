@@ -53,6 +53,69 @@
 
 ![运行截图](https://nilaoda.github.io/N_m3u8DL-CLI/source/images/%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8.gif)  
 
+
+# 网页标题自动命名下载器（附加脚本）
+如果你希望“输入网页 URL → 自动抓取 m3u8 → 用网页标题命名视频文件”，可以直接使用仓库根目录的 `m3u8_web_downloader.py`。
+
+```bash
+python3 m3u8_web_downloader.py "https://example.com/video-page" --output-dir ./downloads
+```
+
+常见参数：
+
+```bash
+# 仅列出页面里识别出的 m3u8 链接
+python3 m3u8_web_downloader.py "https://example.com/video-page" --list-only
+
+# 多条 m3u8 时选择第2条（下标从0开始）
+python3 m3u8_web_downloader.py "https://example.com/video-page" --index 1
+
+# 页面提取失败时手动指定 m3u8，并指定输出名
+python3 m3u8_web_downloader.py "https://example.com/video-page" --m3u8 "https://cdn.example.com/a.m3u8" --output-name "我的视频"
+
+# 携带 Referer / Cookie
+python3 m3u8_web_downloader.py "https://example.com/video-page" --referer "https://example.com" --cookie "token=xxx"
+```
+
+> 依赖：系统需安装 `ffmpeg`（或通过 `--ffmpeg` 指定路径）。
+
+
+#### 常见失败原因（下载不了）
+1. **未安装 ffmpeg**（最常见）
+   - 安装 ffmpeg 并加入 PATH；或启动时加 `--ffmpeg "D:\tools\ffmpeg\bin\ffmpeg.exe"`。
+   - 现在脚本也会自动查找“程序同目录”的 `ffmpeg.exe`。
+2. **站点需要请求头**
+   - 补充 `--referer` 和 `--cookie` 再试。
+3. **页面里没有直接暴露 m3u8**
+   - 先用 `--list-only` 看是否提取到链接；提取不到时用 `--m3u8` 手动指定。
+
+
+### GUI 版本（桌面程序）
+如果你更习惯点按钮操作，可使用 `m3u8_web_downloader_gui.py`：
+- 输入网页 URL
+- 点击“解析网页”自动识别 m3u8
+- 选择链接后点击“下载选中链接”
+
+```bash
+python3 m3u8_web_downloader_gui.py
+```
+
+#### 打包 GUI 为 EXE（Windows）
+```bat
+build_m3u8_web_downloader_gui_exe.bat
+```
+
+输出文件：`dist\m3u8_web_downloader_gui.exe`
+
+### 打包成 EXE（Windows）
+仓库根目录已提供 `build_m3u8_web_downloader_exe.bat`，双击或在 CMD 执行即可：
+
+```bat
+build_m3u8_web_downloader_exe.bat
+```
+
+打包成功后输出文件在：`dist\m3u8_web_downloader.exe`
+
 # 命令行选项
 ```
 N_m3u8DL-CLI
