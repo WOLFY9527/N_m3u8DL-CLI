@@ -89,6 +89,24 @@ python3 m3u8_web_downloader.py "https://example.com/video-page" --referer "https
 3. **页面里没有直接暴露 m3u8**
    - 先用 `--list-only` 看是否提取到链接；提取不到时用 `--m3u8` 手动指定。
 
+
+### GUI 版本（桌面程序）
+如果你更习惯点按钮操作，可使用 `m3u8_web_downloader_gui.py`：
+- 输入网页 URL
+- 点击“解析网页”自动识别 m3u8
+- 选择链接后点击“下载选中链接”
+
+```bash
+python3 m3u8_web_downloader_gui.py
+```
+
+#### 打包 GUI 为 EXE（Windows）
+```bat
+build_m3u8_web_downloader_gui_exe.bat
+```
+
+输出文件：`dist\m3u8_web_downloader_gui.exe`
+
 ### 打包成 EXE（Windows）
 仓库根目录已提供 `build_m3u8_web_downloader_exe.bat`，双击或在 CMD 执行即可：
 
